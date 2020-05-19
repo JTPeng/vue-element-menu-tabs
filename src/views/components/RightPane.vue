@@ -77,8 +77,9 @@ export default {
   }
   /* overflow: hidden; */
   & .fix-top {
-    position: fixed;
-    width: 85%; /* 最好动态计算 */
+    position: absolute;
+    width: calc(100% - 240px) ;
+    min-width: calc(1280px - 240px);
     background-color: #fff;
     & .header-top {
       display: flex;

@@ -14,6 +14,7 @@
       active-text-color="#ffd04b"
       :collapse="isCollapse"
       :collapse-transition="false"
+      :unique-opened="true"
     >
       <subMenu :menuList="menuList" :isCollapse="isCollapse" />
     </el-menu>
@@ -64,7 +65,7 @@ export default {
   }
   background-color: #001e3b;
   & .logo {
-    position: fixed;
+    position: absolute;
     z-index: 999;
     width: 15rem;
     height: 60px;
@@ -77,9 +78,6 @@ export default {
     padding: 0 25px 0 20px;
     &.hidden {
       width: 64px;
-    }
-    & i {
-      margin-left: 5px;
     }
     & a {
       margin-left: 20px;

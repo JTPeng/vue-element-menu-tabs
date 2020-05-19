@@ -34,11 +34,9 @@ export default {
 <style lang="postcss" scoped>
 .menu_container {
   display: flex;
-  & .nav {
-    
-  }
+  min-width: 1280px;
   & .pane {
-    width: 100%;
+    width: calc(100% - 240px);
     overflow-x: hidden;
     overflow-y: auto;
   }
