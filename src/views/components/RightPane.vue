@@ -9,12 +9,7 @@
         ></div>
         <div class="header_right">
           <div class="toogle_theme">
-            <el-select
-              v-model="themeColor"
-              placeholder="请选择"
-              :class="`clolor-${themeColor}`"
-              @change="changTheme"
-            >
+            <el-select v-model="switchColor" placeholder="请选择" :class="`clolor-${themeColor}`">
               <el-option
                 v-for="item in themeColorArrr"
                 :key="item.value"
@@ -69,18 +64,11 @@ export default {
           label: '黄色',
         },
       ],
-      // themeColor: '1',
     }
   },
   methods: {
     removeTab() {
       this.closeTab()
-    },
-    handleCommand(item) {
-      console.log(item)
-    },
-    changTheme(value) {
-      this.setThemeColor(value)
     },
     ...mapMutations(['setActiveTabName', 'closeTab', 'setThemeColor']),
   },
@@ -91,6 +79,14 @@ export default {
       },
       set(value) {
         this.setActiveTabName(value)
+      },
+    },
+    switchColor: {
+      get() {
+        return this.themeColor
+      },
+      set(value) {
+        this.setThemeColor(value)
       },
     },
     ...mapState({
