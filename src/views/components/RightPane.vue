@@ -8,6 +8,22 @@
           @click="$emit('changStatus')"
         ></div>
         <div class="header_right">
+          <div class="toogle_theme">
+            <el-select
+              v-model="themeColor"
+              placeholder="请选择"
+              :class="`clolor-${themeColor}`"
+              @change="changTheme"
+            >
+              <el-option
+                v-for="item in themeColorArrr"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value"
+              >
+              </el-option>
+            </el-select>
+          </div>
           <div class="el-icon-switch-button left"></div>
           <div class="user">admin</div>
         </div>
@@ -33,22 +49,40 @@ import TabConetnt from './tabConetnt'
 import { mapState, mapMutations } from 'vuex'
 export default {
   components: {
-    TabConetnt
+    TabConetnt,
   },
   props: {
     isCollapse: {
       type: Boolean,
-      default: true
-    }
+      default: true,
+    },
   },
   data() {
-    return {}
+    return {
+      themeColorArrr: [
+        {
+          value: '1',
+          label: '红色',
+        },
+        {
+          value: '2',
+          label: '黄色',
+        },
+      ],
+      // themeColor: '1',
+    }
   },
   methods: {
     removeTab() {
       this.closeTab()
     },
-    ...mapMutations(['setActiveTabName', 'closeTab'])
+    handleCommand(item) {
+      console.log(item)
+    },
+    changTheme(value) {
+      this.setThemeColor(value)
+    },
+    ...mapMutations(['setActiveTabName', 'closeTab', 'setThemeColor']),
   },
   computed: {
     editableTabsValue: {
@@ -57,13 +91,14 @@ export default {
       },
       set(value) {
         this.setActiveTabName(value)
-      }
+      },
     },
     ...mapState({
-      activeTabName: state => state.menu.activeTabName,
-      tabList: state => state.menu.tabList
-    })
-  }
+      activeTabName: (state) => state.menu.activeTabName,
+      tabList: (state) => state.menu.tabList,
+      themeColor: (state) => state.theme.themeColor,
+    }),
+  },
 }
 </script>
 
@@ -78,7 +113,7 @@ export default {
   /* overflow: hidden; */
   & .fix-top {
     position: absolute;
-    width: calc(100% - 240px) ;
+    width: calc(100% - 240px);
     min-width: calc(1280px - 240px);
     background-color: #fff;
     & .header-top {
@@ -91,6 +126,27 @@ export default {
       }
       & .header_right {
         display: flex;
+        & .toogle_theme {
+          margin-right: 15px;
+          & .el-select {
+            & >>> .el-input__inner {
+              height: 30px;
+            }
+            & >>> .el-input__suffix {
+              top: 5px;
+            }
+            &.clolor-1 {
+              & >>> .el-input__inner {
+                background-color: red;
+              }
+            }
+            &.clolor-2 {
+              & >>> .el-input__inner {
+                background-color: yellow;
+              }
+            }
+          }
+        }
         & .left {
           box-sizing: border-box;
           font-size: 20px;

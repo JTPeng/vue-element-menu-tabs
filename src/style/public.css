@@ -1,3 +1,7 @@
+:root {
+  --main-btn-color-1: red;
+  --main-btn-color-2: yellow;
+}
 html,
 body,
 #app {
@@ -38,4 +42,14 @@ input {
 input::-webkit-input-placeholder {
   color: #eeeeee;
   font-size: 14px;
+}
+.main {
+  & .el-button {
+    &.clolor-1 {
+      background-color: var(--main-btn-color-1);
+    }
+    &.clolor-2 {
+      background-color: var(--main-btn-color-2);
+    }
+  }
 }

@@ -1,8 +1,16 @@
 <template>
-  <div class="hello">loadApply</div>
+  <div class="main">
+    <el-button type="default" :class="`clolor-${themeColor}`">按钮</el-button>
+  </div>
 </template>
 
 <script>
-export default {}
+import { mapState } from 'vuex'
+export default {
+  computed: {
+    ...mapState({
+      themeColor: (state) => state.theme.themeColor,
+    }),
+  },
+}
 </script>
-
