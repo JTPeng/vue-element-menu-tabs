@@ -15,7 +15,7 @@ export const menuList = [
       },
       {
         title: 'loadBorrow',
-        name: '一级菜单查询二',
+        name: '上/下一步',
       },
       {
         title: 'loadChange',

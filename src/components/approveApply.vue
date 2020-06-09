@@ -5,4 +5,8 @@
 <script>
 export default {}
 </script>
+<style lang="stylus" scoped>
+.hello
+  color red
+</style>
 
