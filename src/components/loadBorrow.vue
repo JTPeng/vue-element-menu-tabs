@@ -96,27 +96,19 @@ export default {
     },
     nextStep() {
       let { tabPhaneList, activeIndex, tabsName } = this
-      // 先判断当前激活菜单的下一个菜单是否被激活
-      // 1.获取激活菜单的索引
       const currentIndex = tabPhaneList.findIndex(({ componentName }) => componentName === tabsName)
-      // 当前激活菜单不是最后一项
       if (currentIndex + 1 !== tabPhaneList.length) {
-        // 下一个菜单索引
         this.activeIndex = activeIndex = currentIndex + 1
-        // 下一个菜单是否被激活
         if (tabPhaneList[activeIndex].isActive) {
           this.tabsName = tabPhaneList[activeIndex].componentName
         } else {
-          // 未激活 则调用子组件的方法检验能否将能其激活
           const res = this.$refs[`component-${activeIndex}`][0].isNext
-          // 可激活
           if (res) {
             this.$message.success('保存成功')
             this.tabPhaneList[activeIndex].isActive = true
             this.tabsName = this.tabPhaneList[activeIndex].componentName
           } else {
             this.activeIndex -= 1
-            // 不可激活 则提提示用户
             this.$message.warning('数据未保存')
           }
         }
