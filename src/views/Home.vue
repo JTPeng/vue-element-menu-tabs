@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <el-tabs tab-position="left" style="height: 85vh;">
-      <el-tab-pane v-for="item in menu" :key="item.nameKey" :label="item.label" lazy="true">
+      <el-tab-pane v-for="item in menu" :key="item.nameKey" :label="item.label" :lazy="true">
         <dayNum :nameKey="item.nameKey" />
       </el-tab-pane>
     </el-tabs>
