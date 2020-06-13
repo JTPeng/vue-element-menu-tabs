@@ -1,18 +1,32 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <el-tabs tab-position="left" style="height: 85vh;">
+      <el-tab-pane label="日访数量">
+        <dayNum />
+      </el-tab-pane>
+      <el-tab-pane label="未处理任务">未处理任务</el-tab-pane>
+      <el-tab-pane label="已处理任务">已处理任务</el-tab-pane>
+      <el-tab-pane label="已实现任务">已实现任务</el-tab-pane>
+    </el-tabs>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-
+const dayNum = () => import('@/views/homePages/dayNum')
 export default {
-  name: 'Home',
   components: {
-    HelloWorld
+    dayNum
+  },
+  data() {
+    return {
+      menu: []
+    }
+  },
+  created() {
+    this.init()
+  },
+  methods: {
+    init() {}
   }
 }
 </script>
