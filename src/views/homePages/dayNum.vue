@@ -2,7 +2,7 @@
   <div class="apply-info">
     <el-card class="box-card">
       <div class="title">
-        <span class="left">折线图/柱状图</span>
+        <span class="left">折线图/柱状图{{nameKey}}</span>
         <div class="right">
           <el-date-picker
             v-model="selectDate"
@@ -23,13 +23,18 @@
         </div>
       </div>
       <div class="visualization">
-        <div ref="echarts" id="myChart"></div>
+        <div ref="echarts" :id="echartsNum" style="width:100%;height:500px"></div>
       </div>
     </el-card>
   </div>
 </template>
 <script>
 export default {
+  props: {
+    nameKey: {
+      type: String
+    }
+  },
   data() {
     return {
       selectDate: '',
@@ -45,15 +50,19 @@ export default {
   },
   mounted() {
     // 基于准备好的dom，初始化echarts实例
-    this.myChart = this.$echarts.init(document.getElementById('myChart'))
-    // 响应式echart
-    // window.onresize = () => {
-    //   this.myChart.resize()
-    // }
-    this.drawLine()
+    // this.myChart = this.$echarts.init(document.getElementById('myChart'))
+    this.$nextTick(() => {
+      this.myChart = this.$echarts.init(document.getElementById(this.echartsNum))
+      // 响应式echart
+      // window.onresize = () => {
+      //   this.myChart.resize()
+      // }
+      this.drawLine()
+    })
   },
   methods: {
     init() {
+      console.log(this.nameKey, this.myChart)
       this.yearData = [2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3]
       this.monthData = [3.9, 5.9, 11.1, 18.7, 48.3, 69.2, 231.6, 46.6, 55.4, 18.4, 10.3, 0.7]
     },
@@ -276,6 +285,16 @@ export default {
         ]
       })
     }
+  },
+  computed: {
+    echartsNum() {
+      return 'echarts' + Math.random() * 100000
+    }
+  },
+  watch: {
+    nameKey() {
+      this.drawLine()
+    }
   }
 }
 </script>
@@ -328,10 +347,6 @@ export default {
   }
   & .visualization {
     width: 100%;
-    & #myChart {
-      width: 100%;
-      height: 500px;
-    }
   }
 }
 </style>
